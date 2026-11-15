@@ -1,0 +1,14 @@
+# Data and models are never committed
+data/*
+!data/README.md
+models/*
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Editors / notebooks
+.spyproject/
+.ipynb_checkpoints/
