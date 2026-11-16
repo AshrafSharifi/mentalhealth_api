@@ -10,5 +10,5 @@ __pycache__/
 .pytest_cache/
 
 # Editors / notebooks
-.spyproject/
+.vscode/
 .ipynb_checkpoints/
