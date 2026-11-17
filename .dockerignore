@@ -1,0 +1,13 @@
+# Keep the build context small and free of data/secrets
+.git
+.venv
+venv
+data
+notebooks
+tests
+mlruns
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.vscode
+*.md
