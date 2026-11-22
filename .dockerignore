@@ -11,3 +11,5 @@ mlruns
 .pytest_cache
 .vscode
 *.md
+# Local settings
+.env

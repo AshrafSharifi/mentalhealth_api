@@ -12,3 +12,6 @@ __pycache__/
 # Editors / notebooks
 .vscode/
 .ipynb_checkpoints/
+
+# Local settings
+.env

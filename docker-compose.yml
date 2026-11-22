@@ -1,0 +1,15 @@
+# Start the API with:   docker compose up --build
+# Stop it with:         docker compose down
+
+services:
+  api:
+    build: .                                # build from the Dockerfile in this folder
+    image: mental-health-api:0.1.0          # name/tag for the built image
+    container_name: mh-api
+    ports:
+      - "${API_PORT:-8000}:8000"            # host port from .env (default 8000) -> container port 8000
+    environment:
+      MODEL_PATH: /app/models/model.joblib
+    volumes:
+      - ./models:/app/models:ro             # use the model from your laptop (read-only), no rebuild needed
+    restart: unless-stopped                 # restart after crashes or reboots, unless you stopped it
