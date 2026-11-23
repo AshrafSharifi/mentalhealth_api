@@ -18,7 +18,7 @@ import shap
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
-MODEL_PATH = Path(os.getenv("MODEL_PATH", "models/model.joblib"))
+DEFAULT_MODEL_PATH = "models/model.joblib"
 
 state: dict = {}
 
@@ -26,7 +26,9 @@ state: dict = {}
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Load the model ONCE when the server starts, not on every request.
-    bundle = joblib.load(MODEL_PATH)
+    # Read the path at startup (not import time), so tests can point to a test model.
+    model_path = Path(os.getenv("MODEL_PATH", DEFAULT_MODEL_PATH))
+    bundle = joblib.load(model_path)
     state["pipeline"] = bundle["pipeline"]
     state["features"] = bundle["features"]
     # TreeExplainer needs the tree model itself, i.e. the last step of the pipeline.
