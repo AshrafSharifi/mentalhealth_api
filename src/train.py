@@ -77,8 +77,8 @@ def evaluate(model, X_train, y_train, X_test, y_test) -> dict:
         "cross_rmse_std": cross_rmse.std(),
         "cross_r2_mean": cross_r2.mean(),
         "cross_r2_std": cross_r2.std(),
-        "test_rmse": root_mean_squared_error(predict,y_test),
-        "test_r2":r2_score(predict,y_test)
+        "test_rmse": root_mean_squared_error(y_test,predict),
+        "test_r2":r2_score(y_test,predict)
 
 
     }
