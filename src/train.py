@@ -20,7 +20,7 @@ from sklearn.preprocessing import StandardScaler
 
 df = pd.read_csv("data/mentalhealth.csv")
 #print(df.columns)
-TARGET = ["mbi_ex"]
+TARGET = "mbi_ex"
 EXCLUDED = ["id", "mbi_cy", "mbi_ea"]
 FEATURES = [
     "age", "year", "sex", "glang", "part", "job", "stud_h", "health", "psyt",
@@ -31,11 +31,11 @@ RANDOM_STATE = 42
 
 def load_data(path: Path) -> tuple[pd.DataFrame,pd.Series]:
     df= pd.read_csv(path)
-    missing = set(FEATURES+TARGET)-set(df.columns)
+    missing = set(FEATURES+[TARGET])-set(df.columns)
     if missing:
         raise ValueError(f"These columns are missing: {sorted(missing)}")
-    elif df[FEATURES+TARGET].isnull().values.any():
-        raise ValueError("Data contains null value")
+    elif df[FEATURES+[TARGET]].isnull().any().any():
+        raise ValueError("CSV contains missing values; the pipeline expects none.")
     
     return df[FEATURES],df[TARGET]
 
